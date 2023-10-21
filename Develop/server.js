@@ -8,7 +8,6 @@ app.use(express.json());
 
 // Serve static files
 app.use(express.static('public'));
-// app.use(express.static(path.join(__dirname, "public")));
 
 // HTML routes
 app.get('/', (req, res) => {
