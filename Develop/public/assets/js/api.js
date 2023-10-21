@@ -4,7 +4,7 @@ const fs = require('fs');
 const path = require('path');
 
 // Retrieve all notes
-router.get('/api/notes', (req, res) => {
+router.get('/notes', (req, res) => {
   fs.readFile(path.join(__dirname, '../db/db.json'), 'utf8', (err, data) => {
     if (err) {
       console.error(err),
@@ -17,7 +17,7 @@ router.get('/api/notes', (req, res) => {
 });
 
 // Save a new note
-router.post('/api/notes', (req, res) => {
+router.post('/notes', (req, res) => {
   fs.readFile(path.join(__dirname, '../db/db.json'), 'utf8', (err, data) => {
     if (err) {
       console.error(err);
@@ -44,7 +44,7 @@ router.post('/api/notes', (req, res) => {
 });
 
 // Delete a note
-router.delete('/api/notes/:id', (req, res) => {
+router.delete('/notes/:id', (req, res) => {
   const noteId = req.params.id;
   fs.readFile(path.join(__dirname, '../db/db.json'), 'utf8', (err, data) => {
     if (err) {
@@ -52,7 +52,7 @@ router.delete('/api/notes/:id', (req, res) => {
       res.status(500).json({ error: 'Failed to delete note' });
     } else {
       const notes = JSON.parse(data);
-      const updateNotes = notes.filter((note) => note.id !== noteId);
+      const updatedNotes = notes.filter((note) => note.id !== noteId);
       fs.writeFile(
         path.join(__dirname, '../db/db.json'),
         JSON.stringify(updatedNotes),
